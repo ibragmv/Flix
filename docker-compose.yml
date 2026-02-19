@@ -1,0 +1,29 @@
+version: '3.8'
+
+volumes:
+  mongo_data: {}
+
+services:
+  mongo:
+    container_name: mongo
+    image: prismagraphql/mongo-single-replica:5.0.3
+    ports:
+      - 27017:27017
+    restart: unless-stopped
+    volumes:
+      - mongo_data:/data/db:rw
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+
+  express:
+    image: mongo-express
+    restart: unless-stopped
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_BASICAUTH_USERNAME: root
+      ME_CONFIG_BASICAUTH_PASSWORD: password
+      ME_CONFIG_MONGODB_URL: mongodb://root:password@mongo:27017/?authSource=admin&directConnection=true
+    depends_on:
+      - mongo
