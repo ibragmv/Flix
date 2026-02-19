@@ -1,74 +1,174 @@
-# Flix: a Fullstack Netflix Clone
+# Flix 🎬
 
-<!-- ![image](https://user-images.githubusercontent.com/23248726/220005380-ede4fb14-0b8d-4582-a063-3cc4beeccfb7.png) -->
+Welcome to **Flix** — a modern, full-stack video streaming platform inspired by Netflix. Built with Next.js, React, and PostgreSQL, featuring user authentication, movie browsing, favorites management, and a beautiful responsive UI.
 
-This is a repository for a FullStack Netflix Clone using `React`, `NextJS`, `TailwindCSS` & `Prisma`.
+## 🏗 Project Structure
 
-This is me following the instructions on **Code With Antonio** [video](https://www.youtube.com/watch?v=mqUN4N2q4qY) with some of my own changes.
-
-### My additions
-
-- Use NextJS's new App Router.
-- Use PostgreSQL with Supabase.
-- Use Prisma 7 with PostgreSQL adapter.
-
-### Prerequisites
-
-- **Node version 18.x or higher**
-- **Bun** (recommended) or npm/yarn
-- **Supabase account** (for PostgreSQL database)
-
-### Cloning the repository
-
-```shell
-git clone https://github.com/kenan-altaki/flix.git
+```
+flix/
+├── app/                    # Next.js App Router pages
+│   ├── api/               # API routes
+│   ├── auth/              # Authentication pages
+│   ├── profiles/          # User profiles
+│   └── watch/             # Movie watch page
+├── components/            # React components
+├── hooks/                 # Custom React hooks
+├── lib/                   # Utility functions
+├── prisma/                # Prisma schema and migrations
+├── server/                # Server-side utilities
+└── public/                # Static assets
 ```
 
-### Install packages
+---
 
-```shell
+## ✨ Features
+
+- **Movie Streaming:** Browse and watch movies with a beautiful video player
+- **Authentication:** Secure authentication with multiple providers (Google OAuth, GitHub OAuth, Email/Password)
+- **Favorites:** Save your favorite movies to your personal list
+- **User Profiles:** Create and manage user profiles
+- **Responsive Design:** Beautiful UI that works on all devices
+- **Performance:** Optimized with Next.js App Router and SWR
+- **Security:** Row-level security with Supabase and Prisma
+
+---
+
+## 🛠 Tech Stack
+
+- **Runtime:** [Bun](https://bun.sh) (recommended) or Node.js
+- **Framework:** Next.js 14 (App Router) / React
+- **Styling:** TailwindCSS
+- **Language:** TypeScript
+- **State Management:** Zustand
+- **Data Fetching:** SWR
+- **Database/ORM:** Prisma / PostgreSQL (Supabase)
+- **Authentication:** NextAuth.js
+- **Icons:** Heroicons, React Icons
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/kenan-altaki/flix.git
+cd flix
+```
+
+### 2. Install dependencies
+```bash
 bun install
 ```
 
-### Setup Supabase
-
-1. Create a new project in [Supabase](https://supabase.com)
-2. Go to Project Settings > Database
-3. Find the "Connection string" section and select "URI"
-4. **Important:** Copy the connection string with the `service_role` key (this bypasses RLS for server-side operations)
-5. The connection string should look like:
-   ```
-   postgresql://postgres.xxxxx:[SERVICE_ROLE_KEY]@aws-0-eu-central-1.pooler.supabase.com:6543/postgres
-   ```
-
-### Setup .env file
-
-Copy `example.env` to `.env` and fill in your values:
-
-```env
-# Use service_role key to bypass RLS for server-side operations
-DATABASE_URL="postgresql://postgres.xxxxx:[SERVICE_ROLE_KEY]@aws-0-eu-central-1.pooler.supabase.com:6543/postgres"
-
-GOOGLE_CLIENT_ID=
-GOOGLE_CLIENT_SECRET=
-GITHUB_ID=
-GITHUB_SECRET=
-NEXTAUTH_JWT_SECRET=
-NEXTAUTH_SECRET=
+Or with npm:
+```bash
+npm install
 ```
 
-**Note:** Using `service_role` key is recommended for server-side Next.js applications with Prisma. It automatically bypasses RLS and eliminates Security Advisor warnings. See `RLS_SETUP.md` for more details.
+### 3. Set up Supabase
 
-### Setup database
+1. Create a new project at [Supabase](https://supabase.com)
+2. Navigate to **Project Settings** → **Database**
+3. Find the **Connection string** section and select **URI**
+4. Copy the connection string (use the "Session pooler" connection string for Prisma)
+
+### 4. Configure environment variables
+
+Copy the example environment file:
+```bash
+cp .env.example .env
+```
+
+Edit `.env` and fill in your values:
+
+```env
+# Database connection string from Supabase
+DATABASE_URL="postgresql://postgres:[YOUR-PASSWORD]@db.[YOUR-PROJECT-REF].supabase.co:5432/postgres"
+
+# NextAuth Configuration
+NEXTAUTH_JWT_SECRET="your-jwt-secret-here"
+NEXTAUTH_SECRET="your-nextauth-secret-here"
+
+# OAuth Providers (optional)
+GOOGLE_CLIENT_ID="your-google-client-id"
+GOOGLE_CLIENT_SECRET="your-google-client-secret"
+GITHUB_ID="your-github-client-id"
+GITHUB_SECRET="your-github-client-secret"
+```
+
+**Generate secrets:**
+```bash
+# Generate NEXTAUTH_SECRET
+openssl rand -base64 32
+
+# Generate NEXTAUTH_JWT_SECRET
+openssl rand -base64 32
+```
+
+### 5. Set up OAuth providers (optional)
+
+#### Google OAuth
+1. Go to [Google Cloud Console](https://console.cloud.google.com/)
+2. Create a new project or select an existing one
+3. Enable Google+ API
+4. Create OAuth 2.0 credentials
+5. Add authorized redirect URI: `http://localhost:3000/api/auth/callback/google`
+6. Copy Client ID and Client Secret to `.env`
+
+#### GitHub OAuth
+1. Go to [GitHub Developer Settings](https://github.com/settings/developers)
+2. Create a new OAuth App
+3. Set Authorization callback URL: `http://localhost:3000/api/auth/callback/github`
+4. Copy Client ID and Client Secret to `.env`
+
+### 6. Initialize database
 
 Run Prisma migrations to create the database schema:
-
-```shell
+```bash
 bun prisma migrate dev
 ```
 
-### Start the app
+Or with npm:
+```bash
+npx prisma migrate dev
+```
 
-```shell
+### 7. Start development server
+
+```bash
 bun dev
 ```
+
+Or with npm:
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
+
+---
+
+## 🔧 Available Scripts
+
+- `bun dev` - Start development server
+- `bun build` - Build for production
+- `bun start` - Start production server
+- `bun lint` - Run ESLint
+- `bun prisma generate` - Generate Prisma Client
+- `bun prisma migrate dev` - Run database migrations
+- `bun prisma studio` - Open Prisma Studio (database GUI)
+
+---
+
+## 🔒 Security Notes
+
+- Always use environment variables for sensitive data
+- Never commit `.env` files to version control
+- Keep your database credentials secure
+- See `RLS_SETUP.md` for more information about Row Level Security configuration
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
