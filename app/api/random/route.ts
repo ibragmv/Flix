@@ -20,6 +20,6 @@ export async function GET(req: NextRequest) {
     return NextResponse.json(randomMovie[0], { status: 200 });
   } catch (error) {
     console.error(error);
-    NextResponse.json({ error: error }, { status: 500 });
+    return NextResponse.json({ error: error }, { status: 500 });
   }
 }
