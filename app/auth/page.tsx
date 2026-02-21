@@ -55,7 +55,7 @@ const Auth = () => {
         <nav className="px-12 py-5">
           <Image
             src="/images/logo.png?v=2"
-            alt="logo"
+            alt="Flix"
             className="h-12"
             width={178}
             height={48}

@@ -5,6 +5,8 @@ import { without } from "lodash";
 import prismadb from "@/lib/prismadb";
 import { getServerAuthSession } from "@/server/auth";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(req: NextRequest) {
   const session = await getServerAuthSession();
   if (!session) throw new Error("Unauthenticated");
@@ -57,4 +59,6 @@ export async function DELETE(req: NextRequest) {
   return NextResponse.json(updatedUser);
 }
 
-export async function GET(req: NextRequest) {}
+export async function GET(req: NextRequest) {
+  return NextResponse.json({ error: "Method not allowed" }, { status: 405 });
+}

@@ -1,4 +1,5 @@
 import React, { useCallback } from "react";
+import Image from "next/image";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { PlayIcon } from "@heroicons/react/24/solid";
 
@@ -15,10 +16,12 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
 
   return (
     <div className="group bg-zinc-900 col-span relative h-[12vw]">
-      <a href={`/watch/${data.id}`}>
-        <img
+      <a href={`/watch/${data.id}`} className="block relative w-full h-[12vw]">
+        <Image
           src={data.thumbnailUrl}
           alt="Movie"
+          fill
+          unoptimized
           draggable={false}
           className="
         cursor-pointer
@@ -30,8 +33,6 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
         group-hover:opacity-90
         sm:group-hover:opacity-0
         delay-300
-        w-full
-        h-[12vw]
       "
         />
       </a>
@@ -54,10 +55,12 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
         group-hover:opacity-100
       "
       >
-        <a href={`/watch/${data.id}`}>
-          <img
+        <a href={`/watch/${data.id}`} className="block relative w-full h-[12vw]">
+          <Image
             src={data.thumbnailUrl}
             alt="Movie"
+            fill
+            unoptimized
             draggable={false}
             className="
           cursor-pointer
@@ -66,8 +69,6 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
           duration
           shadow-xl
           rounded-t-md
-          w-full
-          h-[12vw]
         "
           />
         </a>

@@ -1,5 +1,6 @@
 import { getServerAuthSession } from "@/server/auth";
 import { redirect } from "next/navigation";
+import Image from "next/image";
 import React from "react";
 
 const Profiles = async () => {
@@ -28,9 +29,10 @@ const Profiles = async () => {
               group-hover:cursor-pointer
               group-hover:border-white
               overflow-hidden
+              relative
               "
               >
-                <img src="/images/default-blue.png" alt="profile" />
+                <Image src="/images/default-blue.png" alt="profile" fill className="object-cover" sizes="176px" />
               </div>
               <div
                 className="
