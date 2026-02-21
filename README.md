@@ -51,8 +51,8 @@ flix/
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/kenan-altaki/flix.git
-cd flix
+git clone https://github.com/ibragmv/Flix
+cd Flix
 ```
 
 ### 2. Install dependencies
