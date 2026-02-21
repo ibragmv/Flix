@@ -92,6 +92,7 @@ NEXTAUTH_SECRET="your-nextauth-secret-here"
 # OAuth Providers (optional)
 GOOGLE_CLIENT_ID="your-google-client-id"
 GOOGLE_CLIENT_SECRET="your-google-client-secret"
+
 GITHUB_ID="your-github-client-id"
 GITHUB_SECRET="your-github-client-secret"
 ```
