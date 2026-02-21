@@ -4,14 +4,6 @@ import bcrypt from "bcrypt";
 
 import prismadb from "@/lib/prismadb";
 
-export const config = {
-  api: {
-    bodyParser: {
-      sizeLimit: "500kb",
-    },
-  },
-};
-
 export async function POST(req: NextRequest) {
   if (req.method !== "POST")
     return NextResponse.json({ error: "Forbidden" }, { status: 405 });
